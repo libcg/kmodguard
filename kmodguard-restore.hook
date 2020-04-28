@@ -2,6 +2,7 @@
 Description = Restoring live kernel modules...
 When = PostTransaction
 Exec = /usr/bin/kmodguard-restore
+Depends = rsync
 [Trigger]
 Operation = Upgrade
 Operation = Remove

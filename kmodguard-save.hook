@@ -2,6 +2,7 @@
 Description = Saving live kernel modules...
 When = PreTransaction
 Exec = /usr/bin/kmodguard-save
+Depends = rsync
 [Trigger]
 Operation = Upgrade
 Operation = Remove
