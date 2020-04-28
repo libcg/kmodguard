@@ -1,0 +1,9 @@
+[Action]
+Description = Saving live kernel modules...
+When = PreTransaction
+Exec = /usr/bin/kmodguard-save
+[Trigger]
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = linux

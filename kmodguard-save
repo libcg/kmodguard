@@ -1,0 +1,15 @@
+#!/bin/bash
+
+MOD="/usr/lib/modules"
+VER=$(uname -r)
+FILES=$(pacman -Ql linux | cut -d' ' -f2 | grep "$MOD/$VER" | grep -v '/$' | sed s+/usr/lib/modules/++)
+
+if [ -z "$FILES" ]
+then
+    echo "Nothing to save."
+    exit 0
+fi
+
+cd $MOD
+mkdir -p kmodguard
+rsync -aR $FILES kmodguard

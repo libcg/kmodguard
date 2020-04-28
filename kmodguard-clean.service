@@ -1,0 +1,9 @@
+[Unit]
+Description=Cleanup kernel module backups
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/kmodguard-clean
+
+[Install]
+WantedBy=multi-user.target

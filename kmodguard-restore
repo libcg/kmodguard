@@ -1,0 +1,15 @@
+#!/bin/bash
+
+MOD="/usr/lib/modules"
+VER=$(uname -r)
+
+if [ ! -d "$MOD/kmodguard/$VER" ]
+then
+    echo "Nothing to restore."
+    exit 0
+fi
+
+cd $MOD/kmodguard
+rsync -aR $VER ..
+rm -r $VER
+mkdir $VER # Needed by kmodguard-clean

@@ -1,0 +1,9 @@
+[Action]
+Description = Restoring live kernel modules...
+When = PostTransaction
+Exec = /usr/bin/kmodguard-restore
+[Trigger]
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = linux

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+MOD="/usr/lib/modules"
+VER=$(uname -r)
+
+if [ ! -d "$MOD/kmodguard" ]
+then
+    exit 1
+fi
+
+cd $MOD/kmodguard
+BACKUPS=$(find * -type d -empty 2> /dev/null)
+
+cd $MOD
+for BACKUP in $BACKUPS
+do
+    echo -n "$BACKUP... "
+
+    pacman -Qo $BACKUP &> /dev/null
+    if [ $? -eq 0 ]
+    then
+        # There might be some extra modules left installed
+        echo "SKIP (owned by package)"
+    elif [ "$BACKUP" = "$VER" ]
+    then
+        # Kernel is currently running
+        echo "SKIP (running)"
+    else
+        rm -r $BACKUP
+        rmdir $MOD/kmodguard/$BACKUP
+        echo "OK"
+    fi
+done
